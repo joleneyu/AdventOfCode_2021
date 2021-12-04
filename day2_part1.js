@@ -999,6 +999,7 @@ const list = ["forward",6
 ,"down",3
 ,"forward",6]
 
+
 const list2 = ["forward",5
 ,"down", 5
 ,"forward", 8
@@ -1007,30 +1008,26 @@ const list2 = ["forward",5
 ,"forward", 2]
 
 
-function aim_position(list) {
+function position(list) {
     let position_H = 0;
     let position_D = 0;
-    let aim = 0;
     for (let i = 0; i < list.length; i=i+2) {
-        // console.log([position_H, position_D, aim])
         let element1 = list[i];  //direction
         let element2 = list[i+1]; //number
         // console.log(element1);
         // console.log(element2);
         if (element1 == "forward") {
             position_H += element2;
-            position_D += aim * element2;
         } 
         else if (element1 == "down") {
-            aim += element2;
+            position_D += element2;
         } 
         else {
-            aim -= element2;
+            position_D -= element2
         }
     }
-    console.log([position_H, position_D, aim])
-    console.log(position_D*position_H)
+    console.log([position_H, position_D])
 }
 
 
-aim_position(list)
+position(list)
