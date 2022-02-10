@@ -1044,13 +1044,66 @@ function oxygen_generator_rating (list) {
     // Call the method with for loop
     // let tempList = [];
     let tempList = list.mySelect(0)
-    // let numDigits = list[0].toString.length;
-    // console.log(numDigits)
+    const numDigits = list[0].length;
+    console.log(numDigits)
+    // console.log(tempList)
+    for (let a = 1; a < numDigits; a++) {
+        tempList = tempList.mySelect(a)
+        // console.log(tempList)
+    }
     console.log(tempList)
-    // for (let a = 0; a < numDigits; a++) {
-    //     tempList = list.mySelect(a)
-    //     console.log(tempList)
+    return tempList
+
+
+
+
+    // let counter = 0;
+    // for (const i of list_1) {
+    //     if (i == 0) {
+    //         counter++
+    //     }
     // }
+    // console.log(counter)
+}
+
+
+function co2_scrubber_rating (list) {
+
+    // create "mySelect" methods to select the numbers base on bit criteria
+    Array.prototype.mySelectCO2 = function(counter) {
+        let temp_list_0 = [];
+        let temp_list_1 =[];
+        for (let i = 0; i < this.length; i++) {
+          if (this[i].slice(counter, counter+1) == 0) {
+              temp_list_0 = temp_list_0.concat(this[i]);
+          }
+          else {
+              temp_list_1 = temp_list_1.concat(this[i])
+          }
+        }
+        if (temp_list_0.length > temp_list_1.length) {
+            // console.log(temp_list_1)
+            return temp_list_1
+        }
+        else {
+            // console.log(temp_list_0)
+            return temp_list_0
+        }
+      };
+
+    // Call the method with for loop
+    // let tempList = [];
+    let tempList = list.mySelectCO2(0)
+    const numDigits = list[0].length;
+    // console.log(numDigits)
+    // console.log(tempList)
+    for (let a = 1; a < numDigits; a++) {
+        tempList = tempList.mySelectCO2(a)
+        if (tempList.length == 1) { break; }
+        // console.log(tempList)
+    }
+    console.log(tempList)
+    return tempList
 
 
 
@@ -1065,3 +1118,4 @@ function oxygen_generator_rating (list) {
 }
 
 oxygen_generator_rating(new_list)
+co2_scrubber_rating(new_list)
