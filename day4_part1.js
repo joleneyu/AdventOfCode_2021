@@ -1,4 +1,4 @@
-const list = [
+const boards = [
 37,72,60,35,89
 ,32,49,4,77,82
 ,30,26,27,63,88
@@ -601,4 +601,121 @@ const list = [
 
 //use find box and replace with "\n\n ,\n ,\n," etc
 
+// console.log(list[0], list[25], list[50])
 
+const drawNumbers = [46,12,57,37,14,78,31,71,87,52,64,97,10,35,54,36,27,84,80,94,99,22,0,11,30,44,86,59,66,7,90,21,51,53,92,8,76,41,39,77,42,88,29,24,60,17,68,13,79,67,50,82,25,61,20,16,6,3,81,19,85,9,28,56,75,96,2,26,1,62,33,63,32,73,18,48,43,65,98,5,91,69,47,4,38,23,49,34,55,83,93,45,72,95,40,15,58,74,70,89]
+
+// console.log(drawNumbers.length)
+function sumOfDrawNumber(list, row, column) {
+    
+    let SumOfIndex_row = [];
+    let SumOfIndex_column = [];
+    let i = 0;
+
+    for (let l=0; l<100; l++) {
+        for (let r=0; r<row; r++){
+            let TempSum_row = 0;
+            for (let c=0; c<column; c++) {
+                i = c+r*5+l*25
+                if(drawNumbers.includes(list[i])) {
+                    TempSum_row += drawNumbers.indexOf(list[i])
+                } else {
+                    continue
+                }
+            }
+            SumOfIndex_row = SumOfIndex_row.concat(TempSum_row)
+        }
+    }
+    // console.log(SumOfIndex_row)
+    // return SumOfIndex_row
+
+    for (let l=0; l<100; l++) {
+        for (let c=0; c<column; c++){
+            let TempSum_column = 0;
+            for (let r=0; r<row; r++) {
+                i = c+r*5+l*25
+                if(drawNumbers.includes(list[i])) {
+                    TempSum_column += drawNumbers.indexOf(list[i])
+                } else {
+                    continue
+                }
+            }
+            SumOfIndex_column = SumOfIndex_column.concat(TempSum_column)
+        }
+    }
+    // console.log(SumOfIndex_column)
+
+    // Find out what's the smallest sum of draw numbers
+    let min_row = Math.min(...SumOfIndex_row)
+    console.log(min_row)
+    let min_column = Math.min(...SumOfIndex_column)
+    console.log(min_column)
+
+    let indexOfDrawNumber = SumOfIndex_column.indexOf(42)
+    console.log(indexOfDrawNumber)
+
+    const win_list = [
+         73,36,84,90,40
+        ,16,4,57,9,29
+        ,38,97,46,51,83
+        ,86,88,99,44,32
+        ,54,49,37,43,62]
+
+    // Double confirm which column has the earliest match with draw numbers - 84,57,46,99,37
+    let win_column_sum = drawNumbers.indexOf(84)+drawNumbers.indexOf(57)+drawNumbers.indexOf(46)+drawNumbers.indexOf(99)+drawNumbers.indexOf(37)
+    console.log(win_column_sum)
+
+    // Check the last draw numbe this column hits
+    let win_draw_number = [drawNumbers.indexOf(84), drawNumbers.indexOf(57), drawNumbers.indexOf(46), drawNumbers.indexOf(99), drawNumbers.indexOf(37)]
+    console.log(win_draw_number)
+    let used_drawNumbers = [46,12,57,37,14,78,31,71,87,52,64,97,10,35,54,36,27,84,80,94,99]
+
+
+    // Find out the sum of the win_list
+    const reducer = (previousValue, currentValue) => previousValue + currentValue
+    let sumOfwinList = win_list.reduce(reducer)
+    console.log(sumOfwinList)
+
+    //Find out the Sum of the unmarked numbers
+    let sumOfwinList_drawNumbers = 0
+    for (let i = 0; i < win_list.length; i++) {
+        if (used_drawNumbers.includes(win_list[i])) {
+            sumOfwinList_drawNumbers+=win_list[i]
+        }
+        else {continue}
+    }
+    console.log(sumOfwinList_drawNumbers)
+    const unmarkedNum = sumOfwinList -sumOfwinList_drawNumbers
+    console.log(unmarkedNum)
+
+    
+
+}
+
+sumOfDrawNumber(boards, 5, 5)
+
+// function bingo(list) {
+//     const drawNumbers = [46,12,57,37,14,78,31,71,87,52,64,97,10,35,54,36,27,84,80,94,99,22,0,11,30,44,86,59,66,7,90,21,51,53,92,8,76,41,39,77,42,88,29,24,60,17,68,13,79,67,50,82,25,61,20,16,6,3,81,19,85,9,28,56,75,96,2,26,1,62,33,63,32,73,18,48,43,65,98,5,91,69,47,4,38,23,49,34,55,83,93,45,72,95,40,15,58,74,70,89]
+//     for (let i = 0; i < 25; i++) {
+//         const a = drawNumbers.find()
+//         if (list[i] == 46) {
+//             temp_list_0 = temp_list_0.concat(i)
+//         }
+//         else if (list[i] == 12) {
+//             temp_list_1 = temp_list_1.concat(i)
+//         }
+//         else if (list[i] == 57) {
+//             temp_list_2 =temp_list_2.concat(i)
+//         }
+//         else if (list[i] == 37) {
+//             temp_list_3 =temp_list_3.concat(i)
+//         }
+//         else if (list[i] == 14) {
+//             temp_list_4 =temp_list_4.concat(i)
+//         }
+
+//     }
+//     console.log(temp_list_0, temp_list_1, temp_list_2, temp_list_3, temp_list_4)
+// }
+
+// bingo(boards)
